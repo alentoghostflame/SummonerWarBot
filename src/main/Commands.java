@@ -19,6 +19,7 @@ public class Commands {
 		}
 	}
 	void ScreenShot() {
+		//Basic Screenshot utility
 		this.BasicCommand("adb shell screencap /sdcard/screen.png");
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}

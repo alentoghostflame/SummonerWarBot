@@ -25,7 +25,7 @@ These goals are not really important, but would be good to implement after the M
 
 ## Methods
 
-To know what is happening on the screen, currently the script takes a screenshot using the Android command "screencap" with a PNG format. It then reads the pixel at a certain coordinate on the screen, and using a array of Hex values located in ArrayHolder.HEXCOLOR, decides if to tap the screen at certain coordinates or not.
+To know what is happening on the screen, currently the script takes a screenshot using the Android command "screencap" with a PNG format. It then reads the pixel at a certain coordinate on the screen, and using a array of Hex values located in ArrayHolder.HEXCOLOR, decides if to tap the screen at certain coordinates or not,
 
 Currently working on this: Instead of querying for colors of specific pixels on the screen and deciding what to do based on that, I want it to scan the entirety of the screenshot and logically make decisions based on what it finds, with the overall goal still completing all the daily quests. 
 
