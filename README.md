@@ -36,9 +36,13 @@ These are known bottlenecks that slow down either portions or the entire script.
 1. Using screencap to make a PNG file of the Targets screen is slow.
 2. Transferring the PNG image from the Target to the Host is slow (USB 2.0).
 
+### Issues
+
+1. Currently only have a Galaxy S6, with a 1440x2560 (portrait) screen. Anything else will almost certainly break the script, particularly the hex values. 
+
 ### Fixes
 
-These would be fixed for the bottlenecks. Not required, but would be good to fix.
+These applies to both Bottlenecks and Issues. Not required, but would be good to fix.
 
 1. Switch from screepcap to something faster
 2. Find method to either shrink the size of image transferred, or increase rate of transfer.
