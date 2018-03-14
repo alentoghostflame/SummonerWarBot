@@ -24,7 +24,6 @@ public class Commands {
 	}
 	
 	String ColorCheck(int x, int y) throws IOException {
-		ScreenShot();
 		File file = new File("screen.png");
 		BufferedImage image = ImageIO.read(file);
 		int  clr   =  image.getRGB(x, y);
