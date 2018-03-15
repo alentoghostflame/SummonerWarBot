@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,9 +11,9 @@ import javax.imageio.ImageIO;
 public class Commands {
 	void BasicCommand(String command) {
 		try {
+			System.out.println(command);
 			Process process = Runtime.getRuntime().exec(command);
 			process.waitFor();
-			System.out.println(command);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (InterruptedException e) {
@@ -25,8 +27,8 @@ public class Commands {
 	}
 	
 	String ColorCheck(int x, int y) throws IOException {
-		File file = new File("screen.png");
-		BufferedImage image = ImageIO.read(file);
+		//File file = new File("screen.png");
+		BufferedImage image = ImageIO.read(new File("screen.png"));
 		int  clr   =  image.getRGB(x, y);
 		int  red   = (clr & 0x00ff0000) >> 16;
 		int  green = (clr & 0x0000ff00) >> 8;

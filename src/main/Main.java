@@ -9,14 +9,19 @@ public class Main {
 		System.out.println("System Start!");
 		//Setup Basics
 		Commands Commands = new Commands();
+		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
 		
-		Commands.BasicCommand("adb devices");
+		ImageArrayMaker.Main();
 		
+		
+		
+		/*
 		try {
 			AdCheck();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		System.out.println("End!");
 	}
 	

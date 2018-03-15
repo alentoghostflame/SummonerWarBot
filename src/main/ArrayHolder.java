@@ -18,4 +18,8 @@ public class ArrayHolder {
 			"test"
 	};
 	
+	public static String[][] IMAGEARRAY = new String[ImageArrayMaker.Width()][ImageArrayMaker.Height()];
+			
 }
+	
+
