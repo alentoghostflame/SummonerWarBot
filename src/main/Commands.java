@@ -25,18 +25,8 @@ public class Commands {
 		this.BasicCommand("adb shell screencap /sdcard/screen.png");
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}
-	
-	String ColorCheck(int x, int y) throws IOException {
-		//File file = new File("screen.png");
-		BufferedImage image = ImageIO.read(new File("screen.png"));
-		int  clr   =  image.getRGB(x, y);
-		int  red   = (clr & 0x00ff0000) >> 16;
-		int  green = (clr & 0x0000ff00) >> 8;
-		int  blue  =  clr & 0x000000ff;
-		return String.format("#%02x%02x%02x", red, green, blue); 
-	}
 	boolean ColorCompare(int x, int y, int h) throws IOException { 
-		String hex = ColorCheck(x, y);
+		String hex = ArrayHolder.IMAGEARRAY[x][y];
 		System.out.println("Hex detected: " + hex);
 		System.out.println("Hex in Array: " + ArrayHolder.HEXCOLOR[h]);
 		if (hex.equals(ArrayHolder.HEXCOLOR[h])) 
