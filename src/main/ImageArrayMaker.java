@@ -42,71 +42,46 @@ public class ImageArrayMaker {
 		Commands Commands = new Commands();
 		Commands.ScreenShot();
 		//Log Array to file for debug
-		//BufferedWriter outputWriter = null;
-		
+		BufferedWriter outputWriter = null;
+		//Get Width and Height for this entire function, as well as execute those methods for the
+		//IMAGEARRAY.
 		int width = ImageArrayMaker.Width();
 		int height = ImageArrayMaker.Height();
 		
-		
 		try {
+			//Read the file "screen.png"
 			BufferedImage image = ImageIO.read(new File("screen.png"));
+			//Log Array to file for debug. Either creates new, or overwrites old log.
+			outputWriter = new BufferedWriter(new FileWriter("ArrayLog.txt"));
 			
+			//For the Height of the Image...
 			for (int y = 0; y < height; y++) {
+				//For the Width of the Image...
 				for (int x = 0; x < width; x++) {
-					ArrayHolder.IMAGEARRAY[x][y] = ("#1a2b3c");
 					
-					
-					String hexColour = Integer.toHexString(image.getRGB(x, y) & 0xffffff);
-					if (hexColour.length() < 6) {
-					    hexColour = "000000".substring(0, 6 - hexColour.length()) + hexColour;
+					String hexColor = Integer.toHexString(image.getRGB(x, y) & 0xffffff);
+					if (hexColor.length() < 6) {
+					    hexColor = "000000".substring(0, 6 - hexColor.length()) + hexColor;
 					}
-					ArrayHolder.IMAGEARRAY[x][y] = hexColour;
-					System.out.println("X: " + x + " Y: " + y + " Hex: " + hexColour);
+					//Put the hexColor into IMAGEARRAY at specific coordinates
+					ArrayHolder.IMAGEARRAY[x][y] = hexColor;
+					//Print X, Y, and Hex for Debug Purposes. Slows down program considerably.
+					//System.out.println("X: " + x + " Y: " + y + " Hex: " + hexColor);
+					//Log to file for Debug Purposes. Slows down program slightly.
+					outputWriter.write(ArrayHolder.IMAGEARRAY[x][y] + " ");
 				}
+				//Print Y for Debug Reasons, not to be used with Line 70. Slows down program slightly.
+				//System.out.println("Y: " + y);
+				//Go to the next line in ArrayLog.txt
+				outputWriter.newLine();
 			}
-			
+			//Finish up ArrayLog.txt
+			outputWriter.flush();  
+			outputWriter.close();
 		} catch (IOException e) {
 			System.out.println("IOException in ImageArrayMaker!");
 			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		
-		
-		/*
-		try {
-			BufferedImage image = ImageIO.read(new File("screen.png"));
-			
-			//Log Array to file for debug
-			//outputWriter = new BufferedWriter(new FileWriter("ArrayLog.txt"));
-			
-			for (int y = 0; y < ImageArrayMaker.Height(); y++) {
-				for (int x = 0; x < ImageArrayMaker.Width(); x++) {
-					//ArrayHolder.IMAGEARRAY[x][y] = Commands.ColorCheck(x, y);
-					//outputWriter.write(ArrayHolder.IMAGEARRAY[x][y] + " ");
-					int  clr   =  image.getRGB(x, y);
-					int  red   = (clr & 0x00ff0000) >> 16;
-					int  green = (clr & 0x0000ff00) >> 8;
-					int  blue  =  clr & 0x000000ff;
-					ArrayHolder.IMAGEARRAY[x][y] =  String.format("#%02x%02x%02x", red, green, blue);
-					System.out.println("X = " + x);
-				}
-				System.out.println("Y = " + y);
-				//outputWriter.newLine();
-			}
-			//Log Array to file for debug
-			//outputWriter.flush();  
-			//outputWriter.close();  
-		} catch (IOException e) {
-			System.out.println("IOException in ImageArrayMaker!");
-			e.printStackTrace();
-		}
-		*/
-		
-		
+		}	
 		return 0;
 	}
 
