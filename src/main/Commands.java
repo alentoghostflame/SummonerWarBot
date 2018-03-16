@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Commands {
+	//This method is for an easy way to execute system commands.
 	void BasicCommand(String command) {
 		try {
 			System.out.println(command);
@@ -25,6 +26,7 @@ public class Commands {
 		this.BasicCommand("adb shell screencap /sdcard/screen.png");
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}
+	//Need to rework to use REFERENCEIMAGEARRAY.
 	boolean ColorCompare(int x, int y, int h) throws IOException { 
 		String hex = ArrayHolder.IMAGEARRAY[x][y];
 		System.out.println("Hex detected: " + hex);
