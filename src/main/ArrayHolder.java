@@ -10,14 +10,6 @@ public class ArrayHolder {
 			//Friends 1-5
 			//{2180, 620}
 	};
-	//Depricated, deleting when Commands.ColorCompare is redone.
-	public static final String[][] HEXCOLOR = {
-			//Brownish Yellow Close Button, 1200 1300
-			{"#d6b153"},
-			//Yellowish Brown Collect Button, 1850 500
-			{"#c19a5c"},
-			{"test"}
-	};
 	
 	//Holds all the hex color values of an image, exclusively for screen.png.
 	public static String[][] IMAGEARRAY = new String[ImageArrayMaker.Width()][ImageArrayMaker.Height()];
