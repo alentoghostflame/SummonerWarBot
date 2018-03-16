@@ -6,7 +6,8 @@ This is a project to automate the mobile game Summoners War on the Android platf
 
 You need an Android phone, and a PC with Android Debug Bridge (ADB) installed as a command accessible from the default terminal.
 
-The PC (Host) is typically linked with the Android phone (Target) with a USB to micro USB cable, but ADB over WiFi does exist, but hasn't been tested with this program.
+The PC (Host) is typically linked with the Android phone (Target) with a USB to micro USB 
+cable, but ADB over WiFi does exist, but hasn't been tested with this program.
 
 ## Main Goal
 
@@ -25,9 +26,14 @@ These goals are not really important, but would be good to implement after the M
 
 ## Methods
 
-To know what is happening on the screen, currently the script takes a screenshot using the Android command "screencap" with a PNG format. It then reads the pixel at a certain coordinate on the screen, and using a array of Hex values located in ArrayHolder.HEXCOLOR, decides if to tap the screen at certain coordinates or not,
+To know what is happening on the screen, currently the script takes a screenshot using the Android 
+command "screencap" with a PNG format. It then reads the pixel at a certain coordinate on the 
+screen, and using a array of Hex values located in ArrayHolder.HEXCOLOR, decides if to tap the 
+screen at certain coordinates or not.
 
-Currently working on this: Instead of querying for colors of specific pixels on the screen and deciding what to do based on that, I want it to scan the entirety of the screenshot and logically make decisions based on what it finds, with the overall goal still completing all the daily quests. 
+Currently working on this: Instead of querying for colors of specific pixels on the screen and 
+deciding what to do based on that, I want it to scan the entirety of the screenshot and logically 
+make decisions based on what it finds, with the overall goal still completing all the daily quests. 
 
 ### Bottlenecks
 
@@ -38,7 +44,8 @@ These are known bottlenecks that slow down either portions or the entire script.
 
 ### Issues
 
-1. Currently only have a Galaxy S6, with a 1440x2560 (portrait) screen. Anything else will almost certainly break the script, particularly the hex values. 
+1. Currently only have a Galaxy S6, with a 1440x2560 (portrait) screen. Anything else will almost 
+certainly break the script, particularly the hex values. 
 
 ### Fixes
 
@@ -47,4 +54,7 @@ These applies to both Bottlenecks and Issues. Not required, but would be good to
 1. Switch from screepcap to something faster
 2. Find method to either shrink the size of image transferred, or increase rate of transfer.
 
+### Notes
 
+Hypothetically, with a lot of work, the core methods of this script could be adapted to suit games 
+that don't need the screen to be updated very fast.
