@@ -26,16 +26,56 @@ public class Commands {
 		this.BasicCommand("adb shell screencap /sdcard/screen.png");
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}
-	//Need to rework to use REFERENCEIMAGEARRAY.
-	boolean ColorCompare(int x, int y, int h) throws IOException { 
-		String hex = ArrayHolder.IMAGEARRAY[x][y];
-		System.out.println("Hex detected: " + hex);
-		System.out.println("Hex in Array: " + ArrayHolder.HEXCOLOR[h]);
-		if (hex.equals(ArrayHolder.HEXCOLOR[h])) 
-			System.out.println("Identical!");
-		 else 
-			System.out.println("Different!");
-		return hex.equals(ArrayHolder.HEXCOLOR[h]);
-		
+	//This Method is to compare colors of the screen to a reference image.
+	int[] ColorCompare(int inputx, int inputy) throws IOException { 
+		System.out.println("Starting ColorCompare!");
+		//Integer array that returns the X and Y coordinates of the reference found.
+		int[] ColorFound = new int[2];
+		//Used to keep track of how wide the actual reference image is inside the array.
+		int referencewidth = 0;
+		//Used to check how many times the image matches the reference image, used with referencewidth.
+		int ColorFoundCheck = 0;
+		//get Width at the beginning as to not have to recalculate it.
+		int width = ImageArrayMaker.Width();
+		//get Height at the beginning as to not have to recalculate it.
+		int height = ImageArrayMaker.Height();
+		//Have to check how big the reference image actually is inside the array.
+		for (int refx = 0; ArrayHolder.REFERENCEIMAGEARRAY[refx][0] != null; refx++) {
+			referencewidth++;
+		}
+		System.out.println("Reference Width: " + referencewidth);
+		System.out.println("Reference First Hex: " + ArrayHolder.REFERENCEIMAGEARRAY[0][0]);
+		//Main loop for determining if the reference matches
+		for (int y = inputy; y < height; y++) {
+			for (int x = inputx; x < width; x++) {
+				//If currently selected pixel equals first pixel in the reference image...
+				if (ArrayHolder.IMAGEARRAY[x][y].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][0])) {
+					System.out.println("Color Found!");
+					//If currently selected pixel equals first pixel in the reference image...
+					for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][0]); refx++) {
+						//Add 1 to the color check counter, assuming that the reference array isn't null.
+						if (ArrayHolder.REFERENCEIMAGEARRAY != null) {
+							ColorFoundCheck++;
+							System.out.println(ColorFoundCheck + ") Match found!");
+						}
+						//If the color check counter is equal to the width of the reference
+						//image, return the first X and Y coordinates it found it at.
+						if (ColorFoundCheck == referencewidth) {
+							System.out.println("Identical!");
+							ColorFound[0] = x;
+							ColorFound[1] = y;
+							return ColorFound;
+						}
+					}
+				}
+				//Print X, and Y for Debug Purposes. Slows down program considerably.
+				//System.out.println("Checking X: " + x + " Y: " + y);
+			}
+			//Print Y for Debug Reasons, not to be used with Line 69. Slows down program slightly.
+			//System.out.println("Checking Y: " + y);
+		}
+		//If no match is found, return -1 on the X value of the array. 
+		ColorFound[0] = -1;
+		return ColorFound;		
 	}
 }
