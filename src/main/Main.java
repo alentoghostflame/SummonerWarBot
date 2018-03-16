@@ -11,7 +11,8 @@ public class Main {
 		Commands Commands = new Commands();
 		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
 		
-		ImageArrayMaker.Main();
+		main.ImageArrayMaker.UpdateScreen();
+		ImageArrayMaker.UpdateReference("OKButton.png");
 		
 		System.out.println("End!");
 	}
