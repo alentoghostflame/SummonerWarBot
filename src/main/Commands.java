@@ -2,6 +2,8 @@ package main;
 
 import java.io.IOException;
 
+//This class is meant to hold general commands that often add as shortcuts for the Main class file.
+
 public class Commands {
 	//This method is for an easy way to execute system commands.
 	void BasicCommand(String command) {

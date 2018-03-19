@@ -1,5 +1,8 @@
 package main;
 
+//This class is where the methods in other classes are called from, and should contain all of the higher
+//logic that decides what is going on, and what to do based on the information given.
+
 public class Main {
 
 	public static void main(String[] args) {

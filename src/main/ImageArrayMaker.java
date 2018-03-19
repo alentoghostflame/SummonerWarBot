@@ -8,7 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-
+//This class is meant to deal with methods that directly read and/or write to either various arrays that
+//contain data related to images, or read the images themselves.
 
 public class ImageArrayMaker {
 	//Method to figure out the Width of screen.png, and only screen.png.
