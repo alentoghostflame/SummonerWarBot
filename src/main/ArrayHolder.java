@@ -26,7 +26,7 @@ public class ArrayHolder {
 	//Holds all the hex color values of an image, exclusively for screen.png.
 	public static String[][] IMAGEARRAY = new String[ImageArrayMaker.Width()][ImageArrayMaker.Height()];
 	//Holds all the hex color values of an image, used and replaced by all reference images.
-	public static String[][] REFERENCEIMAGEARRAY = new String[ImageArrayMaker.Width()][2];
+	public static String[][] REFERENCEIMAGEARRAY = new String[ImageArrayMaker.Width()][ImageArrayMaker.Height()];
 			
 }
 	

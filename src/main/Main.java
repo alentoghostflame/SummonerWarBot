@@ -10,18 +10,13 @@ public class Main {
 		System.out.println("System Start!");
 		//Setup Basics
 		Commands Commands = new Commands();
-		//ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
-		do {
-			Commands.ReferenceImageCheck("OKButton.png");
-		} while (Commands.ReferenceImageCheck("OKButton.png"));
-		do {
-			Commands.ReferenceImageCheck("AdDontShowAgain.png");
-		} while (Commands.ReferenceImageCheck("AdDontShowAgain.png"));
-		do {
-			Commands.ReferenceImageCheck("CloseButton.png");
-		} while (Commands.ReferenceImageCheck("CloseButton.png"));
-		
-		
-		
+		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
+		System.out.println(ArrayHolder.REFERENCEIMAGES.length + " Reference Images available.");
+		//This int array indicates how many of each image is on the screen.
+		int[] onscreen = new int[ArrayHolder.REFERENCEIMAGES.length];
+		//ImageArrayMaker.Main("CloseButton.png", "REFERENCEIMAGEARRAY", 2560, 1440);
+		//int test[][] = Commands.ReferenceImageCheck("CloseButton.png");
+		//System.out.println("Matches: " + test.length);
+		ImageArrayMaker.UpdateReference("CloseButton.png");
 	}
 }

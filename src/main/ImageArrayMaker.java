@@ -38,6 +38,8 @@ public class ImageArrayMaker {
 	}
 	//Main method for uploading an image to an Array.
 	public static int Main(String inputimage, String array, int width, int height) {
+		//Arguments, inputimage can be any image in the images folder + screen.png.
+		//Array can currently be IMAGEARRAY exclusively for screen.png, or REFERENCEIMAGEARRAY for everything else.
 		System.out.println("Starting ImageArrayMaker!");
 		//Log Array to file for debug
 		BufferedWriter outputWriter = null;
@@ -89,17 +91,6 @@ public class ImageArrayMaker {
 			System.out.println("IOException in ImageArrayMaker!");
 			e.printStackTrace();
 		}	
-		return 0;
-	}
-	
-	public static int UpdateScreen() {
-		//This method is for an easy command to update the screen.
-		Commands Commands = new Commands();
-		Commands.ScreenShot();
-		String inputimage = "screen.png";
-		int width = ImageArrayMaker.Width();
-		int height = ImageArrayMaker.Height();
-		ImageArrayMaker.Main(inputimage, "IMAGEARRAY", width, height);
 		return 0;
 	}
 	public int UpdateReference(String referenceimage) {

@@ -23,6 +23,8 @@ public class Commands {
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}
 	//This Method is to compare colors of the screen to a reference image.
+	//If it cant find a color, returns -1 at ColorCompare[0].
+	//Else, it returns the X coordinate at ColorCompare[0], and the Y coordinate at ColorCompare[1].
 	int[] ColorCompare(int inputx, int inputy) throws IOException { 
 		System.out.println("Starting ColorCompare!");
 		//Integer array that returns the X and Y coordinates of the reference found.
@@ -77,25 +79,46 @@ public class Commands {
 		ColorFound[0] = -1;
 		return ColorFound;		
 	}
-	public boolean ReferenceImageCheck(String image) {
+	public int[][] ReferenceImageCheck(String image) {
 		Commands Commands = new Commands();
 		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
-		main.ImageArrayMaker.UpdateScreen();
 		ImageArrayMaker.UpdateReference(image);
-		try {
-			int[] check = Commands.ColorCompare(0, 0);
-			if (check[0] == -1) {
-				System.out.println("No Match Found!");
-				return false;
+		int[][] matchfound = new int[ArrayHolder.REFERENCEIMAGES.length + 1][2];
+		int startx = 0, starty = 0;
+		for (int i = 0; matchfound[0][0] != -1; i++) {
+			try {
+				int[] check = Commands.ColorCompare(startx, starty);
+				
+				/*
+				int[] check = Commands.ColorCompare(startx, starty);
+				if (check[0] == -1) {
+					System.out.println("No Match Found!");
+					matchfound[ArrayHolder.REFERENCEIMAGES.length][0] = -1;
+					return matchfound;
+				}
+				else {
+					System.out.println("Match found at X: " + check[0] + " Y: " + check[1]);
+					startx = check[0] + 1;
+					starty = check[1] + 1;
+					matchfound[i][0] = check[0];
+					matchfound[i][1] = check[1];
+					//return true;
+				}
+				*/
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			else {
-				System.out.println("Match found at X: " + check[0] + " Y: " + check[1]);
-				Commands.BasicCommand("adb shell input tap " + check[0] + " " + check[1]);
-				return true;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		return true;
+		return matchfound;
+	}
+	public int UpdateScreen() {
+		//This method is for an easy command to update the screen.
+		Commands Commands = new Commands();
+		Commands.ScreenShot();
+		String inputimage = "screen.png";
+		int width = ImageArrayMaker.Width();
+		int height = ImageArrayMaker.Height();
+		ImageArrayMaker.Main(inputimage, "IMAGEARRAY", width, height);
+		return 0;
 	}
 }
