@@ -1,12 +1,6 @@
 package main;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Commands {
 	//This method is for an easy way to execute system commands.
@@ -56,7 +50,9 @@ public class Commands {
 						//Add 1 to the color check counter, assuming that the reference array isn't null.
 						if (ArrayHolder.REFERENCEIMAGEARRAY != null) {
 							ColorFoundCheck++;
-							System.out.println(ColorFoundCheck + ") Match found!");
+							//Print if reference matches screen, along with how many matches been found
+							//in a row already.
+							//System.out.println(ColorFoundCheck + ") Match found!");
 						}
 						//If the color check counter is equal to the width of the reference
 						//image, return the first X and Y coordinates it found it at.
@@ -67,6 +63,7 @@ public class Commands {
 							return ColorFound;
 						}
 					}
+					ColorFoundCheck = 1;
 				}
 				//Print X, and Y for Debug Purposes. Slows down program considerably.
 				//System.out.println("Checking X: " + x + " Y: " + y);
@@ -77,5 +74,26 @@ public class Commands {
 		//If no match is found, return -1 on the X value of the array. 
 		ColorFound[0] = -1;
 		return ColorFound;		
+	}
+	public boolean ReferenceImageCheck(String image) {
+		Commands Commands = new Commands();
+		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
+		main.ImageArrayMaker.UpdateScreen();
+		ImageArrayMaker.UpdateReference(image);
+		try {
+			int[] check = Commands.ColorCompare(0, 0);
+			if (check[0] == -1) {
+				System.out.println("No Match Found!");
+				return false;
+			}
+			else {
+				System.out.println("Match found at X: " + check[0] + " Y: " + check[1]);
+				Commands.BasicCommand("adb shell input tap " + check[0] + " " + check[1]);
+				return true;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 }

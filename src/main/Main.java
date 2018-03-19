@@ -1,7 +1,5 @@
 package main;
 
-import java.io.IOException;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -9,21 +7,18 @@ public class Main {
 		System.out.println("System Start!");
 		//Setup Basics
 		Commands Commands = new Commands();
-		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
+		//ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
+		do {
+			Commands.ReferenceImageCheck("OKButton.png");
+		} while (Commands.ReferenceImageCheck("OKButton.png"));
+		do {
+			Commands.ReferenceImageCheck("AdDontShowAgain.png");
+		} while (Commands.ReferenceImageCheck("AdDontShowAgain.png"));
+		do {
+			Commands.ReferenceImageCheck("CloseButton.png");
+		} while (Commands.ReferenceImageCheck("CloseButton.png"));
 		
-		main.ImageArrayMaker.UpdateScreen();
-		ImageArrayMaker.UpdateReference("OKButton.png");
 		
-		try {
-			int[] check = Commands.ColorCompare(0, 0);
-			if (check[0] == -1)
-				System.out.println("No Match Found!");
-			else
-				System.out.println("Match found at X: " + check[0] + " Y: " + check[1]);
-			Commands.BasicCommand("adb shell input tap " + check[0] + " " + check[1]);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("End!");
+		
 	}
 }
