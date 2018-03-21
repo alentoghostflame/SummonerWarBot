@@ -64,26 +64,6 @@ public class Commands {
 							}
 						}
 					}
-					
-					
-					
-					
-					
-					/*
-					for (int refy = 0; ArrayHolder.IMAGEARRAY[x][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][refy]); refy++) {
-						//System.out.println("Y " + (y + refy) + " Matches!");
-						for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][refy]); refx++) {
-							//System.out.println("X " + (x + refx) + " Matches!");
-							if (ArrayHolder.REFERENCEIMAGEARRAY[refx][refy] != null) {
-								ColorFoundCheck++;
-								//Print if reference matches screen, along with how many matches been found
-								//in a row already.
-								//System.out.println(ColorFoundCheck + ") Match found!");
-							}
-							
-						}
-					}
-					*/
 					if (ColorFoundCheck == referencewidth * referenceheight) {
 						System.out.println("Identical!");
 						ColorFound[0] = x;
@@ -94,35 +74,7 @@ public class Commands {
 					System.out.println("ColorFoundCheck = " + ColorFoundCheck + " Before reset.");
 					
 					ColorFoundCheck = 0;
-				}
-					
-					
-					
-					
-					/*
-					//If currently selected pixel equals first pixel in the reference image...
-					for (int refy = 0; ArrayHolder.IMAGEARRAY[x][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][refy]); refy++) {
-						for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][0 + refy]); refx++) {
-							System.out.println("Checking X: " + (x + refx) + " Y: " + (y + refx));
-							//Add 1 to the color check counter, assuming that the reference array isn't null.
-							if (ArrayHolder.REFERENCEIMAGEARRAY != null) {
-								ColorFoundCheck++;
-								//Print if reference matches screen, along with how many matches been found
-								//in a row already.
-								//System.out.println(ColorFoundCheck + ") Match found!");
-							}
-							//If the color check counter is equal to the width of the reference
-							//image, return the first X and Y coordinates it found it at.
-							if (ColorFoundCheck == referencewidth * referenceheight) {
-								System.out.println("Identical!");
-								ColorFound[0] = x;
-								ColorFound[1] = y;
-								return ColorFound;
-							}
-						}
-					}
-					*/
-				
+				}	
 				//Print X, and Y for Debug Purposes. Slows down program considerably.
 				//System.out.println("Checking X: " + x + " Y: " + y);
 			}
