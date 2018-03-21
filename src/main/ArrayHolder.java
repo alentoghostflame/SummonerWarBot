@@ -16,11 +16,15 @@ public class ArrayHolder {
 			//Sort images based on occurrence. Top image should be the most common, bottom the rarest.
 			//Put comment before image with places of occurrence.
 			//Shows up at: Monthly Bonus Package (Post Login Screen)
-			"CloseButton.png",
+			//"CloseButton.png",
 			//Shows up at: Ad screens (Pre Login Screen)
-			"AdDontShowAgain.png",
+			//"AdDontShowAgain.png",
 			//Shows up at: Update screen (Pre Login Screen)
-			"OKButton.png"
+			"OKButton.png",
+			//Shows up at: Title Screen
+			"SummonersWarLogo.png",
+			//Shows up at: Title Screen (Ads)
+			"DontShowThisAgainToday.png"
 	};
 	
 	//Holds all the hex color values of an image, exclusively for screen.png.

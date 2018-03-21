@@ -23,14 +23,15 @@ public class Commands {
 		this.BasicCommand("adb pull /sdcard/screen.png");
 	}
 	//This Method is to compare colors of the screen to a reference image.
-	//If it cant find a color, returns -1 at ColorCompare[0].
-	//Else, it returns the X coordinate at ColorCompare[0], and the Y coordinate at ColorCompare[1].
-	int[] ColorCompare(int inputx, int inputy) throws IOException { 
+	int[] ColorCompare(int inputx, int inputy) { 
+		//inputx and inputy tell it what X and Y coordinates to start checking at.
+		//If it cant find a color, returns -1 at ColorCompare[0].
+		//Else, it returns the X coordinate at ColorCompare[0], and the Y coordinate at ColorCompare[1].
 		System.out.println("Starting ColorCompare!");
 		//Integer array that returns the X and Y coordinates of the reference found.
 		int[] ColorFound = new int[2];
-		//Used to keep track of how wide the actual reference image is inside the array.
-		int referencewidth = 0;
+		//Used to keep track of how wide and tall the actual reference image is inside the array.
+		int referencewidth = 0, referenceheight = 0;
 		//Used to check how many times the image matches the reference image, used with referencewidth.
 		int ColorFoundCheck = 0;
 		//get Width at the beginning as to not have to recalculate it.
@@ -38,37 +39,90 @@ public class Commands {
 		//get Height at the beginning as to not have to recalculate it.
 		int height = ImageArrayMaker.Height();
 		//Have to check how big the reference image actually is inside the array.
+		for (int refy = 0; ArrayHolder.REFERENCEIMAGEARRAY[0][refy] != null; refy++) {
+			referenceheight++;
+		}
 		for (int refx = 0; ArrayHolder.REFERENCEIMAGEARRAY[refx][0] != null; refx++) {
 			referencewidth++;
 		}
-		System.out.println("Reference Width: " + referencewidth);
+		System.out.println("Reference Width: " + referencewidth + " Reference Height: " + referenceheight);
 		System.out.println("Reference First Hex: " + ArrayHolder.REFERENCEIMAGEARRAY[0][0]);
 		//Main loop for determining if the reference matches
 		for (int y = inputy; y < height; y++) {
 			for (int x = inputx; x < width; x++) {
+				//System.out.println("Checking X: " + x + " Y: " + y);
 				//If currently selected pixel equals first pixel in the reference image...
 				if (ArrayHolder.IMAGEARRAY[x][y].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][0])) {
 					System.out.println("Color Found!");
-					//If currently selected pixel equals first pixel in the reference image...
-					for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][0]); refx++) {
-						//Add 1 to the color check counter, assuming that the reference array isn't null.
-						if (ArrayHolder.REFERENCEIMAGEARRAY != null) {
-							ColorFoundCheck++;
-							//Print if reference matches screen, along with how many matches been found
-							//in a row already.
-							//System.out.println(ColorFoundCheck + ") Match found!");
-						}
-						//If the color check counter is equal to the width of the reference
-						//image, return the first X and Y coordinates it found it at.
-						if (ColorFoundCheck == referencewidth) {
-							System.out.println("Identical!");
-							ColorFound[0] = x;
-							ColorFound[1] = y;
-							return ColorFound;
+					for (int refy = 0; refy < referenceheight && ArrayHolder.IMAGEARRAY[x][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][refy]); refy++) {
+						for (int refx = 0; refx < referencewidth && ArrayHolder.IMAGEARRAY[x + refx][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][refy]); refx++) {
+							if (ArrayHolder.REFERENCEIMAGEARRAY[refx][refy] != null) {
+								ColorFoundCheck++;
+								//Print if reference matches screen, along with how many matches been found
+								//in a row already.
+								//System.out.println(ColorFoundCheck + ") Match found!");
+							}
 						}
 					}
-					ColorFoundCheck = 1;
+					
+					
+					
+					
+					
+					/*
+					for (int refy = 0; ArrayHolder.IMAGEARRAY[x][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][refy]); refy++) {
+						//System.out.println("Y " + (y + refy) + " Matches!");
+						for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][refy]); refx++) {
+							//System.out.println("X " + (x + refx) + " Matches!");
+							if (ArrayHolder.REFERENCEIMAGEARRAY[refx][refy] != null) {
+								ColorFoundCheck++;
+								//Print if reference matches screen, along with how many matches been found
+								//in a row already.
+								//System.out.println(ColorFoundCheck + ") Match found!");
+							}
+							
+						}
+					}
+					*/
+					if (ColorFoundCheck == referencewidth * referenceheight) {
+						System.out.println("Identical!");
+						ColorFound[0] = x;
+						ColorFound[1] = y;
+						return ColorFound;
+					}
+					
+					System.out.println("ColorFoundCheck = " + ColorFoundCheck + " Before reset.");
+					
+					ColorFoundCheck = 0;
 				}
+					
+					
+					
+					
+					/*
+					//If currently selected pixel equals first pixel in the reference image...
+					for (int refy = 0; ArrayHolder.IMAGEARRAY[x][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[0][refy]); refy++) {
+						for (int refx = 0; ArrayHolder.IMAGEARRAY[x + refx][y + refy].equals(ArrayHolder.REFERENCEIMAGEARRAY[refx][0 + refy]); refx++) {
+							System.out.println("Checking X: " + (x + refx) + " Y: " + (y + refx));
+							//Add 1 to the color check counter, assuming that the reference array isn't null.
+							if (ArrayHolder.REFERENCEIMAGEARRAY != null) {
+								ColorFoundCheck++;
+								//Print if reference matches screen, along with how many matches been found
+								//in a row already.
+								//System.out.println(ColorFoundCheck + ") Match found!");
+							}
+							//If the color check counter is equal to the width of the reference
+							//image, return the first X and Y coordinates it found it at.
+							if (ColorFoundCheck == referencewidth * referenceheight) {
+								System.out.println("Identical!");
+								ColorFound[0] = x;
+								ColorFound[1] = y;
+								return ColorFound;
+							}
+						}
+					}
+					*/
+				
 				//Print X, and Y for Debug Purposes. Slows down program considerably.
 				//System.out.println("Checking X: " + x + " Y: " + y);
 			}
@@ -79,37 +133,36 @@ public class Commands {
 		ColorFound[0] = -1;
 		return ColorFound;		
 	}
+	//This method takes in a image, and returns how many times it found it, and where it found it.
 	public int[][] ReferenceImageCheck(String image) {
+		//Output: MatchFound[i][] represents how many of that image was found on the screen.
+		//MatchFound[i][0] represents the X value of the ith image found, MatchFound[i][1] represents
+		//the Y value of the ith image found.
 		Commands Commands = new Commands();
 		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
 		ImageArrayMaker.UpdateReference(image);
-		int[][] matchfound = new int[ArrayHolder.REFERENCEIMAGES.length + 1][2];
+		int[][] PreMatchFound = new int[999][2];
+		int PreMatchFoundLength = 0;
 		int startx = 0, starty = 0;
-		for (int i = 0; matchfound[0][0] != -1; i++) {
-			try {
-				int[] check = Commands.ColorCompare(startx, starty);
-				
-				/*
-				int[] check = Commands.ColorCompare(startx, starty);
-				if (check[0] == -1) {
-					System.out.println("No Match Found!");
-					matchfound[ArrayHolder.REFERENCEIMAGES.length][0] = -1;
-					return matchfound;
-				}
-				else {
-					System.out.println("Match found at X: " + check[0] + " Y: " + check[1]);
-					startx = check[0] + 1;
-					starty = check[1] + 1;
-					matchfound[i][0] = check[0];
-					matchfound[i][1] = check[1];
-					//return true;
-				}
-				*/
-			} catch (IOException e) {
-				e.printStackTrace();
+		boolean done = false;
+		for (int i = 0; !done; i++) {
+			int[] ColorCompare = Commands.ColorCompare(startx, starty);
+			if (ColorCompare[0] == -1) {
+				done = true;
+			} else {
+				PreMatchFound[i][0] = ColorCompare[0]; PreMatchFound[i][1] = ColorCompare[1];
+				startx = ColorCompare[0] + 1; starty = ColorCompare[1];
 			}
 		}
-		return matchfound;
+		for (int i = 0; PreMatchFound[i][0] != 0; i++) {
+			PreMatchFoundLength++;
+		}
+		int[][] MatchFound = new int[PreMatchFoundLength][2];
+		for (int i = 0; i < PreMatchFoundLength; i++) {
+		    System.arraycopy(PreMatchFound[i], 0, MatchFound[i], 0, PreMatchFound[0].length);
+		}
+		
+		return MatchFound;
 	}
 	public int UpdateScreen() {
 		//This method is for an easy command to update the screen.

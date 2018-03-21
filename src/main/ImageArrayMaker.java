@@ -93,8 +93,8 @@ public class ImageArrayMaker {
 		}	
 		return 0;
 	}
+	//This method is for an easy command to change what reference image is being compared to the Screen.
 	public int UpdateReference(String referenceimage) {
-		//This method is for an easy command to change what reference image is being compared to the Screen.
 		String imageloc = "/images/" + referenceimage;
 		System.out.println(imageloc);
 		try {
