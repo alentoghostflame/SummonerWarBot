@@ -116,8 +116,8 @@ public class Commands {
 		
 		return MatchFound;
 	}
+	//This method is for an easy command to update the screen.
 	public int UpdateScreen() {
-		//This method is for an easy command to update the screen.
 		Commands Commands = new Commands();
 		Commands.ScreenShot();
 		String inputimage = "screen.png";
@@ -125,5 +125,35 @@ public class Commands {
 		int height = ImageArrayMaker.Height();
 		ImageArrayMaker.Main(inputimage, "IMAGEARRAY", width, height);
 		return 0;
+	}
+	//This Method runs ColorCompare with all the reference Images, then returns a number based on
+	//what reference images it found.
+	public int[][] FindAllReferenceImages() {
+		//Output: AllReferenceImages[i] represents the image in i location of ArrayHolder.REFERENCEIMAGES[i].
+		//If AllReferenceImages[i][0] == -1, that means that the reference image could not be found.
+		//AllReferenceImages[i][0] represents the X value, AllReferenceImages[i][1] represents the Y value
+		//of the reference image found.
+		Commands Commands = new Commands();
+		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
+		int[][] AllReferenceImages = new int[ArrayHolder.REFERENCEIMAGES.length][2];
+		int[] ColorCompare;
+		for (int i = 0; i < ArrayHolder.REFERENCEIMAGES.length; i++) {
+			ImageArrayMaker.UpdateReference(ArrayHolder.REFERENCEIMAGES[i]);
+			ColorCompare = Commands.ColorCompare(0, 0);
+			if (ColorCompare[0] == -1) {
+				AllReferenceImages[i][0] = -1;
+			} else {
+				AllReferenceImages[i][0] = ColorCompare[0];
+				AllReferenceImages[i][1] = ColorCompare[1];
+			}
+		}
+		return AllReferenceImages;
+	}
+	//This method acts as an easy shortcut to taping on the screen.
+	public void Tap(int x, int y) {
+		//Input x represents the X coordinate of where to tap. y represents Y coordinate of where to tap.
+		//Note: Having X tap at a negative value(such as -1) seems to do nothing.
+		Commands Commands = new Commands();
+		Commands.BasicCommand("adb shell input tap " + x + " " + y);
 	}
 }
