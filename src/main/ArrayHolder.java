@@ -26,6 +26,16 @@ public class ArrayHolder {
 			//Shows up at: Title Screen (Ads)
 			"DontShowThisAgainToday.png"
 	};
+	//Images in this array are meant to find out where the Script is in the 
+	public static final String[] REFERENCEIMAGETITLES = {
+			
+	};
+	//Images in this array are meant to find where to perform an action, rather than find out
+	//exactly what location the Script is at in Summoners War.
+	//Examples include the X button, Collect buttons, Battle buttons, ETC.
+	public static final String[] REFERENCEIMAGEBUTTONS = {
+			
+	};
 	
 	//Holds all the hex color values of an image, exclusively for screen.png.
 	public static String[][] IMAGEARRAY = new String[ImageArrayMaker.Width()][ImageArrayMaker.Height()];
