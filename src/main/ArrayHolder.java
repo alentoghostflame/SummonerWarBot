@@ -26,12 +26,14 @@ public class ArrayHolder {
 			//Shows up at: Title Screen (Ads)
 			"DontShowThisAgainToday.png"
 	};
-	//Images in this array are meant to find out where the Script is in the 
+	//Images in this array are meant to find out what location the screen is at in Summoners War, rather
+	//than the find where to perform actions.
+	//Examples include the Guild tab, Monthly Event popup, Weekly Arena Award popup, ETC.
 	public static final String[] REFERENCEIMAGETITLES = {
 			
 	};
 	//Images in this array are meant to find where to perform an action, rather than find out
-	//exactly what location the Script is at in Summoners War.
+	//exactly what location the screen is at in Summoners War.
 	//Examples include the X button, Collect buttons, Battle buttons, ETC.
 	public static final String[] REFERENCEIMAGEBUTTONS = {
 			
