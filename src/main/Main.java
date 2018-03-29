@@ -11,17 +11,18 @@ public class Main {
 		//Announce Start!
 		System.out.println("System Start!");
 		//Setup Basics
+		System.out.println(ArrayHolder.REFERENCEIMAGES.length + " Reference Images available.");
+		
+		
+		
+	}
+	public static int logic() {
 		Commands Commands = new Commands();
 		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
-		System.out.println(ArrayHolder.REFERENCEIMAGES.length + " Reference Images available.");
-		//This int array indicates how many of each image is on the screen.
-		//int[] onscreen = new int[ArrayHolder.REFERENCEIMAGES.length];
-		//ImageArrayMaker.Main("CloseButton.png", "REFERENCEIMAGEARRAY", 2560, 1440);
-		//int test[][] = Commands.ReferenceImageCheck("CloseButton.png");
-		//System.out.println("Matches: " + test.length);
-		Commands.UpdateScreen();
-		ImageArrayMaker.UpdateReference("SummonersWarLogo.png");
-		int test[] = Commands.ColorCompare(0, 0);
-		Commands.BasicCommand("adb shell input tap " + test[0] + " " + test[1]);
+		
+		
+		
+		
+		return 1;
 	}
 }
