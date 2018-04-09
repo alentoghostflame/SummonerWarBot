@@ -103,10 +103,11 @@ public class Commands {
 			if (ColorCompare[0] == -1) {
 				done = true;
 			} else {
+				startx = ColorCompare[0] + 1; starty = ColorCompare[1];
 				TimesFound++;
 			}
 		}
-		System.out.println("Times " + image + " was found: " + TimesFound);
+		Logger.info("Times " + image + " was found: " + TimesFound);
 		int[][] MatchFound = new int[TimesFound][2];
 		for (int i = 0; i < TimesFound; i++) {
 			int[] ColorCompare = Commands.ColorCompare(startx, starty);
