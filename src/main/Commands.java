@@ -93,6 +93,33 @@ public class Commands {
 		Commands Commands = new Commands();
 		ImageArrayMaker ImageArrayMaker = new ImageArrayMaker();
 		ImageArrayMaker.UpdateReference(image);
+		//Beginning Variable for checking how many times the image has been found. Used in creation of final array.
+		int TimesFound = 0;
+		//Used to track where the array found an image, and where to start afterward.
+		int startx = 0, starty = 0;
+		boolean done = false;
+		while (!done) {
+			int[] ColorCompare = Commands.ColorCompare(startx, starty);
+			if (ColorCompare[0] == -1) {
+				done = true;
+			} else {
+				TimesFound++;
+			}
+		}
+		System.out.println("Times " + image + " was found: " + TimesFound);
+		int[][] MatchFound = new int[TimesFound][2];
+		for (int i = 0; i < TimesFound; i++) {
+			int[] ColorCompare = Commands.ColorCompare(startx, starty);
+			if (ColorCompare[0] == -1) {
+				done = true;
+			} else {
+				//Set the x and y variables for that specific image found in the final array.
+				MatchFound[i][0] = ColorCompare[0]; MatchFound[i][1] = ColorCompare[1];
+				//Set startx and starty for the next image.
+				startx = ColorCompare[0] + 1; starty = ColorCompare[1];
+			}
+		}
+		/*
 		int[][] PreMatchFound = new int[999][2];
 		int PreMatchFoundLength = 0;
 		int startx = 0, starty = 0;
@@ -113,7 +140,7 @@ public class Commands {
 		for (int i = 0; i < PreMatchFoundLength; i++) {
 		    System.arraycopy(PreMatchFound[i], 0, MatchFound[i], 0, PreMatchFound[0].length);
 		}
-		
+		*/
 		return MatchFound;
 	}
 	//This method is for an easy command to update the screen.
